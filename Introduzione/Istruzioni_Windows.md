@@ -20,7 +20,7 @@ Se si apre come pagina, si può scaricare direttamente.
 
 Si scarica e esegue da qui:
 
-https://git-scm.com/download/win
+   https://git-scm.com/download/win
 
 ## 4) installazione jupyter
 
