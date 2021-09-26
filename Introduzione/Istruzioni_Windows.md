@@ -24,8 +24,25 @@ https://git-scm.com/download/win
 
 ## 4) installazione jupyter
 
+Aprire prompt di comandi come amministratore, poi
+
+python3 -m pip install jupyter
+
+si può lanciare con 
+
+jupyter notebook
+
+Nota: talvolta l'html potrebbe avere alcuni problemi in delle versioni di windows, copiare il secondo intdirizzo indicato (con http://localhost:8888/...)
 
 ## 5) Installazione root
 
 
 ## 6) Installazione macchina virtuale
+
+Si può scaricare da qui:
+
+https://www.virtualbox.org/wiki/Downloads
+
+In particolare la versione per windows:
+
+https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-Win.exe
