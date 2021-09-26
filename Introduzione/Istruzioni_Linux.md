@@ -22,19 +22,25 @@ Per installarlo ci sono due modi:
 
 Istruzioni:
 
-    Scaricare la iso dal sito su una penna. Ubuntu 20.04 può essere pesante, ordine 3 GB, quindi occhio alla connessione.
+    Scaricare la iso dal sito su una penna. 
+    Ubuntu 20.04 può essere pesante, ordine 3 GB, quindi occhio alla connessione.
 
-    Riavviare il computer, e, nel bios settare il boot di modo che dia priorità alla penna. Il modo di aprire il bios varia da macchina a macchina, tipicamente consiste nel premere un pulsante durante il caricamento di Windows (ad es. F2). Questo di solito compare tra le scritte durante l'avvio.
+    Riavviare il computer, e, nel bios settare il boot di modo che dia priorità alla penna. 
+    Il modo di aprire il bios varia da macchina a macchina, tipicamente consiste nel premere 
+    un pulsante durante il caricamento di Windows (ad es. F2). Questo di solito compare tra le scritte durante l'avvio.
 
 1.2) Realizzare una macchina virtuale e installare il sistema operativo lì. Questo in genere ha difficoltà e rischi piuttosto bassi, quindi consigliato a meno che non vogliate lavorare su linux per la maggior parte del vostro tempo.
 
 Istruzioni:
 
-    Scarivcare virtualbox da qui: https://www.virtualbox.org/wiki/Downloads per la piattaforma ospite (ad es. Windows).
+    Scarivcare virtualbox da qui: https://www.virtualbox.org/wiki/Downloads 
+    per la piattaforma ospite (ad es. Windows).
     
-    Una volta avviato, creare una nuova macchina tramite file -> nuova macchina, con settings Linux , Ubuntu-32 (64 a seconda dell'architettura), e nome macchina riconoscibile.
+    Una volta avviato, creare una nuova macchina tramite file -> nuova macchina, 
+    con settings Linux , Ubuntu-32 (64 a seconda dell'architettura), e nome macchina riconoscibile.
     
-    Aperta la macchina, avviarla e caricare il file iso scaricato in precedenza. Partirà l'installazione e il sistema operativo di conseguenza.
+    Aperta la macchina, avviarla e caricare il file iso scaricato in precedenza. 
+    Partirà l'installazione e il sistema operativo di conseguenza.
 
 
 ## 2) Python3
