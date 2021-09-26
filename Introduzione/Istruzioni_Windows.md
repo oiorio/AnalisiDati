@@ -4,7 +4,7 @@ In generale, Windows non è un ambiente ideale per lo sviluppo. Si consiglia di 
 
 1.1) Windows 10 può installarlo automaticamente. Alternativamente, si puà scaricare da qui:
 
-https://www.python.org/downloads/
+    https://www.python.org/downloads/
 
 Python è necessario per buona aprte di quanto segue.
 
@@ -12,7 +12,7 @@ Python è necessario per buona aprte di quanto segue.
 
 Scaricare pip da:
 
-https://bootstrap.pypa.io/get-pip.py
+    https://bootstrap.pypa.io/get-pip.py
 
 Se si apre come pagina, si può scaricare direttamente.
 
@@ -41,8 +41,8 @@ Nota: talvolta l'html potrebbe avere alcuni problemi in delle versioni di window
 
 Si può scaricare da qui:
 
-https://www.virtualbox.org/wiki/Downloads
+    https://www.virtualbox.org/wiki/Downloads
 
 In particolare la versione per windows:
 
-https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-Win.exe
+    https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26-145957-Win.exe
