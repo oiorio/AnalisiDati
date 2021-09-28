@@ -10,6 +10,6 @@ Benvenuti alla pagina delle esercitazioni del corso di ADFS! La pagina si divide
 6) Concetti di ricostruzione: prompt, non-prompt, fake. Ricostruzione della massa del bosone Z.
 7) Normalizzazione dati-MC, effetti sistematici
 8) Derivazione fondi dai dati
-9) Misure di precisione: trattamento delle sistematiche
+9) Misure di precisione: trattamento delle sistematiche come nuisance parameters
 10) Confronto con la teoria: verità montecarlo
 11) Ricerche di nuova fisica: upper limits ed exclusion limits
