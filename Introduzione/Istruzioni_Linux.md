@@ -57,11 +57,16 @@ Con la versione di linux 20.04 python3 è automaticamente installato
     
     Andare su https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html 
     seguire il link per scaricare l'installer https://www.anaconda.com/products/individual
-    
-    Eseguire:
+ 
+Eseguire:
     
     sudo bash Anaconda-latest-Linux-x86_64.sh
-    
+
+Nota: può essere necessario aggiungere conda al path. 
+Assumendo che anaconda sia installato in /home/myusername/anaconda3    
+
+    PATH=$PATH:~/anaconda3/bin
+
 ## 4) git
 
     sudo apt-get install git
@@ -72,8 +77,31 @@ Con la versione di linux 20.04 python3 è automaticamente installato
 
 Seguire le istruzioni trovate qui:
 
-    aa
+    https://root.cern/install
 
-Se c'è conda installato:
+6.1) installare via binaries:
     
-    aaa
+Scaricare i binaries qui:
+    
+    https://root.cern/install/#download-a-pre-compiled-binary-distribution
+
+Eseguire:
+
+    wget https://root.cern/download/root_v6.24.02.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
+    tar -xzvf root_v6.24.02.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
+    source root/bin/thisroot.sh # also available: thisroot.{csh,fish,bat}
+
+6.2) Se c'è conda installato
+
+Seguire la procedura qui :
+    
+    https://root.cern/install/#conda
+   
+Eseguire:
+
+    conda config --set channel_priority strict
+    conda create -c conda-forge --name rootenv root 
+    conda activate rootenv
+    
+Nota bene: conda qui creerà un ambiente in cui root funziona. La versione suggerita 
+        
