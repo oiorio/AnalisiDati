@@ -1,8 +1,8 @@
 Linux è il sistema operativos su cui è consigliato iniziare. Esistono diverse distribuzioni possibili:
 
-* Scientific Linux è usato al Cern perché è stabile e lunga vita media, oltre alla disponibilità di librerie.
-* Red Hat più dal lato aziendale.
-* Ubuntu è la più user friendly.
+* Red Hat Enterprise è utilizzato in genere lato aziendale.
+* Scientific Linux è usato al Cern, è una versione di Red Hat sponsorizzata dal Fermilab. E' stabile e lunga vita media, oltre alla disponibilità di librerie.
+* Ubuntu è la più user friendly, facile da scaricare e usare, per cui ha una community piuttosto vasta. Non è ottimale, specie con le librerie grafiche.
 
 Le istruzioni saranno per ubuntu
 
@@ -45,10 +45,35 @@ Istruzioni:
 
 ## 2) Python3
 
+Con la versione di linux 20.04 python3 è automaticamente installato
+
 ## 3) pip/conda
 
+3.1) Installare pip:
+    
+    sudo apt-get install pip
+
+3.2) Istruzioni per Anaconda:
+    
+    Andare su https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html 
+    seguire il link per scaricare l'installer https://www.anaconda.com/products/individual
+    
+    Eseguire:
+    
+    sudo bash Anaconda-latest-Linux-x86_64.sh
+    
 ## 4) git
 
+    sudo apt-get install git
+    
 ## 5) jupyter
 
 ## 6) root
+
+Seguire le istruzioni trovate qui:
+
+    aa
+
+Se c'è conda installato:
+    
+    aaa
