@@ -57,7 +57,11 @@ Con la versione di linux 20.04 python3 è automaticamente installato
     
     Andare su https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html 
     seguire il link per scaricare l'installer https://www.anaconda.com/products/individual
- 
+
+Per usare il navigatore occorre installare i seguenti pacchetti:
+
+    apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+
 Eseguire:
     
     sudo bash Anaconda-latest-Linux-x86_64.sh
@@ -66,6 +70,8 @@ Nota: può essere necessario aggiungere conda al path.
 Assumendo che anaconda sia installato in /home/myusername/anaconda3    
 
     PATH=$PATH:~/anaconda3/bin
+
+
 
 ## 4) git
 
@@ -103,5 +109,5 @@ Eseguire:
     conda create -c conda-forge --name rootenv root 
     conda activate rootenv
     
-Nota bene: conda qui creerà un ambiente in cui root funziona. La versione suggerita 
+Nota bene: conda qui creerà un ambiente in cui root funziona, questa è la maniera in cui è suggerito fare.
         
