@@ -1,10 +1,10 @@
-Linux è il sistema operativos su cui è consigliato iniziare. Esistono diverse distribuzioni possibili:
+## Linux è il sistema operativos su cui è consigliato iniziare. Esistono diverse distribuzioni possibili:
 
 * Red Hat Enterprise è utilizzato in genere lato aziendale.
 * Scientific Linux è usato al Cern, è una versione di Red Hat sponsorizzata dal Fermilab. E' stabile e lunga vita media, oltre alla disponibilità di librerie.
 * Ubuntu è la più user friendly, facile da scaricare e usare, per cui ha una community piuttosto vasta. Non è ottimale, specie con le librerie grafiche.
 
-Le istruzioni saranno per ubuntu
+Le istruzioni saranno per ubuntu.
 
 ## 1) Installazione sistema operativo - esempio con Ubuntu 20.04 LTS
 
