@@ -128,5 +128,7 @@ Eseguire:
     conda create -c conda-forge --name rootenv root 
     conda activate rootenv
     
-Nota bene: conda qui creerà un ambiente in cui root funziona, questa è la maniera in cui è suggerito fare.
-        
+Nota bene: conda qui creerà un ambiente nuovo in cui root funziona, questa è la maniera in cui è suggerito fare. L'ambiente di default è "base". 
+Se volete far funzionare ROOT dovrete fare sempre
+    
+    conda activate rootenv
