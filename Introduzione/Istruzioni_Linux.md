@@ -33,7 +33,7 @@ Istruzioni:
 
 Istruzioni:
 
-    Scarivcare virtualbox da qui: https://www.virtualbox.org/wiki/Downloads 
+    Scaricare virtualbox da qui: https://www.virtualbox.org/wiki/Downloads 
     per la piattaforma ospite (ad es. Windows).
     
     Una volta avviato, creare una nuova macchina tramite file -> nuova macchina, 
@@ -42,6 +42,13 @@ Istruzioni:
     Aperta la macchina, avviarla e caricare il file iso scaricato in precedenza. 
     Partirà l'installazione e il sistema operativo di conseguenza.
 
+Suggerimenti:
+    
+    - Assicuratevi di avere almeno 20 GB di spazio per la partizione (reale o virtuale),
+    in quanto il sistema operativo ne userà almeno 9-10 e Anaconda da solo è O(600) MB.
+    
+    - Una volta installata la macchina virtuale, lo schermo potrebbe essere fissato a 480x360:
+    assicuratevi di cambiarla in modo da poterla usare al meglio.
 
 ## 2) Python3
 
@@ -78,6 +85,8 @@ Assumendo che anaconda sia installato in /home/myusername/anaconda3
     sudo apt-get install git
     
 ## 5) jupyter
+
+Da Anaconda potete cliccare sull'icona di jupyter e installarlo.
 
 ## 6) root
 
