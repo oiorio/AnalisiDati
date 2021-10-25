@@ -86,7 +86,17 @@ Assumendo che anaconda sia installato in /home/myusername/anaconda3
     
 ## 5) jupyter
 
-Da Anaconda potete cliccare sull'icona di jupyter e installarlo.
+Potete lanciare Anaconda navigator da linea di comando:
+
+    anaconda-navigator
+
+Una volta lanciato l'icona di jupyter dovrebbe apparire sulla front page potete cliccare sull'icona e installarlo o updatarlo.
+
+Per lanciarlo, da terminale fate:
+    
+    jupyter-notebook
+    
+Dovrebbe partire nel browser di base.
 
 ## 6) root
 
