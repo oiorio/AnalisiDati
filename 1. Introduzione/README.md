@@ -4,7 +4,7 @@ In Istruzioni_Linux.md e Istruzioni_Windows  trovate il setup per Linux ( Ubuntu
 
 Alcune note:
 
-<span style="color:red"> 1)  **E' fortemente consigliato di usare Linux.** </span>
+1) <span style="color:blue"> **E' fortemente consigliato di usare Linux.** </span>
 
 2) Non ci sono istruzioni per MacOSX, ma sotto molti aspetti è simile a Linux.
 
