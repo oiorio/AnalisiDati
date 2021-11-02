@@ -1,3 +1,0 @@
-mass 400
-sigma 70
-lambda 200
