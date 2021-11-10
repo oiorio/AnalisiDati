@@ -15,8 +15,8 @@ float nlleval(TF1* f1, vector<float >xs){
 //void macro_likelihoodscan(string filename="exercise_Likelihood_1.txt",string model_name="model_1.txt"){
 void macro_likelihoodscan(int n_analysis=1){
   string n_an=to_string(n_analysis);
-  string filename = "exercise_Likelihood_"+n_an+".txt";
-  string model_name= "model_"+n_an+".txt";
+  string filename = "../models/exercise_Likelihood_"+n_an+".txt";
+  string model_name= "../models/model_"+n_an+".txt";
   ifstream f(filename);
   ifstream mod(model_name);
   float xs;
