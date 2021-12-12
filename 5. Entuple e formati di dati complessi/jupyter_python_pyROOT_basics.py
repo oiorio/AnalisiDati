@@ -56,14 +56,18 @@
 # 
 # 
 
-# In[19]:
+# In[1]:
 
 
 #Iniziamo quindi dall'importare delle librerie di python
 import os,sys
 
+print( sys.version)
 
-# In[20]:
+print("hello")
+
+
+# In[ ]:
 
 
 #OS permette di interagire col sistema operativo, ad esempio :
@@ -74,7 +78,7 @@ os.system("echo '\nMi restituirà il risultato del comando come eseguito da bash
 os.system("echo 'Ad esempio, il path dei comandi è: \n'$PATH ")
 
 
-# In[21]:
+# In[ ]:
 
 
 #Sys, d'altro canto, è 
@@ -82,27 +86,44 @@ os.system("echo 'Ad esempio, il path dei comandi è: \n'$PATH ")
 print (sys.path)
 
 
-# In[22]:
+# In[ ]:
 
 
-#Se avete seguito le istruzioni per l'installazione, ad es. su , dovrebbe essere possibile
+
+
+
+# In[ ]:
+
+
+#Se avete seguito le istruzioni per l'installazione, ad es. su linux, dovrebbe essere possibile
+
+
+# In[ ]:
+
+
 import ROOT
 
 
-# In[24]:
+# In[ ]:
 
 
-# Facciamo alcuni esempi di base per reiscaldarci:
+# Facciamo alcuni esempi di base per riscaldarci:
 
 
-# In[33]:
+# In[ ]:
 
 
 h1 = ROOT.TH1F("h1_esempio","Istogramma d'esempio",100,-10,10)
+type(h1)
+
+
+# In[ ]:
+
+
 f1 = ROOT.TF1("f1_esempio","gaus",-10,10)
 f1.SetParameters(10,1,5)
 
-h1.FillRandom("f1_esempio",1000)
+h1.FillRandom("f1_esempio",20000)
 
 c1 = ROOT.TCanvas()
 c1.Draw()
@@ -110,7 +131,14 @@ c1.Draw()
 h1.Draw()
 
 
-# In[44]:
+# In[ ]:
+
+
+h1.Fill(30)
+h1.GetBinContent(101)
+
+
+# In[ ]:
 
 
 c1.Draw()

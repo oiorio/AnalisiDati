@@ -13,11 +13,6 @@
 # 
 # 
 # In genere useremo dei "Tree", anche se per la maggior parte dei casi non avremo bisogno solo della struttura tabulare.
-# 
-# Vedi anche qui:
-# 
-# ***aggiungere link a pdf!***
-# 
 
 # ## Files degli OPEN Data del CERN:
 # 
@@ -37,13 +32,14 @@
 # 
 # https://github.com/oiorio/AnalisiDati/tree/main/5.%20Entuple%20e%20formati%20di%20dati%20complessi
 
-# In[1]:
+# In[7]:
 
 
 import os,sys,subprocess as sp
 
-# Mettiamo l'indirizzo in una stringa
-address_tree = "https://github.com/oiorio/AnalisiDati/raw/cf9599b45cd34f1aae71384a5b9b708f0e51a787/5.%20Entuple%20e%20formati%20di%20dati%20complessi/DYJets.root"
+# Mettiamo l'indirizzo in una stringahttps://github.com/oiorio/AnalisiDati/raw/main/5.%20Entuple%20e%20formati%20di%20dati%20complessi/DYJets.root
+address_tree =  "https://github.com/oiorio/AnalisiDati/raw/main/5.%20Entuple%20e%20formati%20di%20dati%20complessi/DYJets.root"
+#address_tree = "https://github.com/oiorio/AnalisiDati/raw/cf9599b45cd34f1aae71384a5b9b708f0e51a787/5.%20Entuple%20e%20formati%20di%20dati%20complessi/DYJets.root"
 
 #prima controlliamo se il file è già in locale:
 if os.path.exists("DYJets.root"):
@@ -51,7 +47,7 @@ if os.path.exists("DYJets.root"):
     download=[0,0]
 
 
-# In[2]:
+# In[8]:
 
 
 if not os.path.exists("DYJets.root") :
@@ -66,13 +62,13 @@ if not os.path.exists("DYJets.root") :
 print(download[0]) #vediamo se è andato a buon fine!
 
 
-# In[3]:
+# In[9]:
 
 
 print(download[1]) #vediamo l'output
 
 
-# In[4]:
+# In[10]:
 
 
 # e ora vediamo l'output del comando ls usato per trovare tutti i fils che finiscono con root!
@@ -87,40 +83,40 @@ print(sp.getstatusoutput("ls -ltrha *.root" )[1])
 #    
 # In realtà faccio:
 
-# In[5]:
+# In[11]:
 
 
 import ROOT #sperando che funzioni...
 
 inputFile = ROOT.TFile("DYJets.root","OPEN") #Così apro il file
 
-inputFile.GetListOfKeys().Print()#Questo stampa le "chiavi" del file. 
+print(inputFile.GetListOfKeys().Print())#Questo stampa le "chiavi" del file. 
 #Come per una mappa o un dizionario ho un "item" in corrispondenza di una "key", in root ogni oggetto
 #salvato in formato persistente ha una chiave
 
 
-# In[6]:
+# In[12]:
 
 
 #trovo un oggetto, posso chiamarlo con il punto come se fosse un metodo:
 inputFile.trees
 
 
-# In[7]:
+# In[13]:
 
 
 #Scopro che è una "TDirectoryFile": posso di nuovo vedere il contenuto:
-inputFile.trees.GetListOfKeys().Print()
+print(inputFile.trees.GetListOfKeys().Print())
 
 
-# In[8]:
+# In[14]:
 
 
 #Che a sua volta è:
 inputFile.trees.events
 
 
-# In[9]:
+# In[15]:
 
 
 #Questo è un TTree!
@@ -133,19 +129,19 @@ mytree = inputFile.Get("trees/events")
 mytree2 = inputFile.trees.events
 
 
-# In[10]:
+# In[18]:
 
 
-mytree.Print()
+mytree2.Print()
 
 
-# In[ ]:
+# In[19]:
 
 
+mytree.Scan("electrons_charge:electrons_size")
 
 
-
-# In[11]:
+# In[20]:
 
 
 #Come faccio a prendere un componente di un tree?
@@ -164,8 +160,11 @@ nMuons = mytree.muontracks_size
 
 print(nMuons)
 
+mytree.GetEntry(11)
+print(mytree.muontracks_size)
 
-# In[12]:
+
+# In[21]:
 
 
 #Maniera alla C++
@@ -190,7 +189,7 @@ print(nMuons_arr)
 # 
 # 2. In maniera "relazionale": sfruttando il formato dei dati, in cui ogni colonna è "legata" alle altre dello stesso evento globalmente.
 
-# In[13]:
+# In[26]:
 
 
 #Esempio 1: voglio disegnare l'energia mancante tutti gli eventi in cui ci sono 2 elettroni
@@ -198,21 +197,37 @@ c1 =ROOT.TCanvas()
 
 #Metodo relazionale:
 c1.Draw()
-mytree.Draw("met_pt","electrons_size==2")
+#mytree.Draw("jets_size","jets_pt[0]>50 && jets_pt[1]>30")
+#mytree.Draw("jets_size","(muontracks_charge[0]==1 && muontracks_charge[1]==-1) || (muontracks_charge[0]==-1 && muontracks_charge[1]==1)")
+mytree.Draw("met_pt>>h2(100,0,100)","electrons_size==2")
+
+#si può fare la stessa cosa col metodo project
 
 
-# In[14]:
+# In[28]:
 
 
 #Metodo iterativo:
-h1= ROOT.TH1F("met_pt","met_pt",100,0,100)
+h1= ROOT.TH1F("met_pt_histo","met_pt",100,0,100)
 for i in range(mytree.GetEntries()): 
     mytree.GetEntry(i)
     if(mytree.electrons_size==2):
         h1.Fill(mytree.met_pt[0])
+
+
+#Se voglio proiettare in un istogramma una variabile che ottengo col metodo 1) posso usare Project
+#mytree.Project("met_pt_histo","met_pt","electrons_size==2 && electrons_charge==1 ")        
+
 c2=ROOT.TCanvas()
 c2.Draw()
 h1.Draw()
+
+
+# In[30]:
+
+
+#Vediamo i valori della carica:
+mytree.Scan("electrons_size:electrons_charge","","",50)
 
 
 # ## Domanda 0: Quale dei due metodi è più facile?
@@ -229,8 +244,14 @@ h1.Draw()
 #   In realtà nel caso relazionale il bin
 # </details>
 
-# ## Domanda 3: e se volessi sapere "quando ci sono 2 elettroni con carica opposta"? 
+# ## Domanda 3: e se volessi sapere "quando ci sono 2 elettroni/muoni con carica opposta"? 
 # ## Oppure, ad esempio, quante coppie di elettroni di carica opposta ci sono?
+
+# In[ ]:
+
+
+
+
 
 # In[ ]:
 
