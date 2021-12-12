@@ -32,12 +32,12 @@
 # 
 # https://github.com/oiorio/AnalisiDati/tree/main/5.%20Entuple%20e%20formati%20di%20dati%20complessi
 
-# In[7]:
+# In[1]:
 
 
 import os,sys,subprocess as sp
 
-# Mettiamo l'indirizzo in una stringa
+# Mettiamo l'indirizzo in una stringahttps://github.com/oiorio/AnalisiDati/raw/main/5.%20Entuple%20e%20formati%20di%20dati%20complessi/DYJets.root
 address_tree =  "https://github.com/oiorio/AnalisiDati/raw/main/5.%20Entuple%20e%20formati%20di%20dati%20complessi/DYJets.root"
 #address_tree = "https://github.com/oiorio/AnalisiDati/raw/cf9599b45cd34f1aae71384a5b9b708f0e51a787/5.%20Entuple%20e%20formati%20di%20dati%20complessi/DYJets.root"
 
@@ -47,7 +47,7 @@ if os.path.exists("DYJets.root"):
     download=[0,0]
 
 
-# In[8]:
+# In[2]:
 
 
 if not os.path.exists("DYJets.root") :
@@ -62,13 +62,13 @@ if not os.path.exists("DYJets.root") :
 print(download[0]) #vediamo se è andato a buon fine!
 
 
-# In[9]:
+# In[3]:
 
 
 print(download[1]) #vediamo l'output
 
 
-# In[10]:
+# In[4]:
 
 
 # e ora vediamo l'output del comando ls usato per trovare tutti i fils che finiscono con root!
@@ -83,7 +83,7 @@ print(sp.getstatusoutput("ls -ltrha *.root" )[1])
 #    
 # In realtà faccio:
 
-# In[11]:
+# In[5]:
 
 
 import ROOT #sperando che funzioni...
@@ -95,28 +95,28 @@ print(inputFile.GetListOfKeys().Print())#Questo stampa le "chiavi" del file.
 #salvato in formato persistente ha una chiave
 
 
-# In[12]:
+# In[6]:
 
 
 #trovo un oggetto, posso chiamarlo con il punto come se fosse un metodo:
 inputFile.trees
 
 
-# In[13]:
+# In[7]:
 
 
 #Scopro che è una "TDirectoryFile": posso di nuovo vedere il contenuto:
 print(inputFile.trees.GetListOfKeys().Print())
 
 
-# In[14]:
+# In[8]:
 
 
 #Che a sua volta è:
 inputFile.trees.events
 
 
-# In[15]:
+# In[9]:
 
 
 #Questo è un TTree!
@@ -129,19 +129,13 @@ mytree = inputFile.Get("trees/events")
 mytree2 = inputFile.trees.events
 
 
-# In[18]:
+# In[10]:
 
 
 mytree2.Print()
 
 
-# In[19]:
-
-
-mytree.Scan("electrons_charge:electrons_size")
-
-
-# In[20]:
+# In[11]:
 
 
 #Come faccio a prendere un componente di un tree?
@@ -164,7 +158,7 @@ mytree.GetEntry(11)
 print(mytree.muontracks_size)
 
 
-# In[21]:
+# In[12]:
 
 
 #Maniera alla C++
@@ -189,7 +183,7 @@ print(nMuons_arr)
 # 
 # 2. In maniera "relazionale": sfruttando il formato dei dati, in cui ogni colonna è "legata" alle altre dello stesso evento globalmente.
 
-# In[26]:
+# In[13]:
 
 
 #Esempio 1: voglio disegnare l'energia mancante tutti gli eventi in cui ci sono 2 elettroni
@@ -204,7 +198,7 @@ mytree.Draw("met_pt>>h2(100,0,100)","electrons_size==2")
 #si può fare la stessa cosa col metodo project
 
 
-# In[28]:
+# In[14]:
 
 
 #Metodo iterativo:
@@ -223,7 +217,7 @@ c2.Draw()
 h1.Draw()
 
 
-# In[30]:
+# In[15]:
 
 
 #Vediamo i valori della carica:
