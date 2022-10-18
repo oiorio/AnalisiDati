@@ -1,14 +1,14 @@
-In generale, Windows non è un ambiente ideale per lo sviluppo. Si consiglia di utilizzare o una partizione con ubuntu, o una macchina virtuale in ambiente linux. In ogni caso, qui ci sono delle informazioni su come installare codice su OS Windows 10.
+In generale, Windows non è consigliato per lo sviluppo in HEP, per via in primis di ROOT, ma anche di diverse operazioni eseguite da shell. 
 
-## 1) Installazione python
+Per far funzionare simultaneamente ROOT, python, jupyter la maniera migliore è usare l'emulatore nativo di Windows 10 via PowerShell, seguono degli step utili.
 
-1.1) Windows 10 può installarlo automaticamente. Alternativamente, si puà scaricare da qui:
+## 1) Lanciare la powershell
 
-    https://www.python.org/downloads/
+## 2) Lanciare l'emulatore nativo di linux da windows
 
-Python è necessario per buona aprte di quanto segue.
+## 3) Installare conda, jupyter, root via powershell
 
-## 2) Installazione pip / conda
+## 4) lanciare jupyter
 
 2.1) Scaricare pip da:
 
