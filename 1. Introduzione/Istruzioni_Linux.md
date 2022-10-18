@@ -29,7 +29,7 @@ Istruzioni:
     Il modo di aprire il bios varia da macchina a macchina, tipicamente consiste nel premere 
     un pulsante durante il caricamento di Windows (ad es. F2). Questo di solito compare tra le scritte durante l'avvio.
 
-    WARNING!!! Se avete Windows come altro sistema operativo, può capitare che un update Windows 10 --> Windows 11 o simili vi causi una formattazione dell'area di Ubuntu!!!
+    ⚠️⚠️⚠️WARNING!!! Se avete Windows come altro sistema operativo e installate linux su una partizione, può capitare che un update Windows 10 --> Windows 11 o simili vi causi una formattazione dell'area di Ubuntu!!!⚠️⚠️⚠️
 
 1.2) Realizzare una macchina virtuale e installare il sistema operativo lì. Questo in genere ha difficoltà e rischi piuttosto bassi, quindi consigliato a meno che non vogliate lavorare su linux per la maggior parte del vostro tempo.
 
