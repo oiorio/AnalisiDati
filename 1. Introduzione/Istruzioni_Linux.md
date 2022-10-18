@@ -1,4 +1,4 @@
-## Linux è il sistema operativos su cui è consigliato iniziare. Esistono diverse distribuzioni possibili:
+## Linux è il sistema operativo su cui è consigliato iniziare. Esistono diverse distribuzioni possibili:
 
 * Red Hat Enterprise è utilizzato in genere lato aziendale.
 * Scientific Linux è usato al Cern, è una versione di Red Hat sponsorizzata dal Fermilab. E' stabile e lunga vita media, oltre alla disponibilità di librerie.
@@ -18,7 +18,7 @@ Di seguito assumeremo la 20.04.3
 
 Per installarlo ci sono due modi:
 
-1.1) Far partire una iso da uno strumento esterno e realizzare una partizione. Consigliato se sapete quello che state facendo e volete impiegare parte del vostro spazio sul pc in maniera permanente.
+1.1) Far partire una iso da uno strumento esterno (e.g. una penna usb) e realizzare una partizione. Consigliato se sapete quello che state facendo e volete impiegare parte del vostro spazio sul pc in maniera permanente.
 
 Istruzioni:
 
@@ -28,6 +28,8 @@ Istruzioni:
     Riavviare il computer, e, nel bios settare il boot di modo che dia priorità alla penna. 
     Il modo di aprire il bios varia da macchina a macchina, tipicamente consiste nel premere 
     un pulsante durante il caricamento di Windows (ad es. F2). Questo di solito compare tra le scritte durante l'avvio.
+
+    WARNING!!! Se avete Windows come altro sistema operativo, può capitare che un update Windows 10 --> Windows 11 o simili vi causi una formattazione dell'area di Ubuntu!!!
 
 1.2) Realizzare una macchina virtuale e installare il sistema operativo lì. Questo in genere ha difficoltà e rischi piuttosto bassi, quindi consigliato a meno che non vogliate lavorare su linux per la maggior parte del vostro tempo.
 
