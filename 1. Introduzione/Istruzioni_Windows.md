@@ -4,57 +4,52 @@ Per far funzionare simultaneamente ROOT, python, jupyter la maniera migliore è 
 
 ## 1) Lanciare la powershell
 
+Powershell dovrebbe essere già presente nella barra dei comandi, bisogna solo fare attenzione a lanciare il comando con privilegi di amministratore per permettere l'installazione di ulteriori componenti / alcune interazioni.
+
 ## 2) Lanciare l'emulatore nativo di linux da windows
+
+
+2.1) In molte installazioni windows c'è già ubuntu installato. Basta digitare da power shell
+    
+    ubuntu 
+
+oppure
+
+    ubuntu.exe
+    
+Per controllare si può iniziare a digitare la parola e premere "tab", che effettuerà completamento automatico.
+
+2.2) Per installare una versione specifica si può usare Windows Subsystem for Linux (wsl). 
+
+Da PowerShell eseguire:
+
+    wsl --install
+    wsl --set-default-version 2
+    wsl --install -d ubuntu
+
+Chiederà di scegliere nome utente e password
+
+A questo punto dovrebbe essere possibile lanciare ubuntu come da punto 1
 
 ## 3) Installare conda, jupyter, root via powershell
 
+Si possono seguire esattamente le stesse istruzioni riportate qui:
+
+https://github.com/oiorio/AnalisiDati/blob/main/1.%20Introduzione/Istruzioni_Linux.md
+
 ## 4) lanciare jupyter
 
-2.1) Scaricare pip da:
+Se avete lanciato la powershell in modalità admin, si può lanciare firefox da windows normalmente e usare il server jupyter generato con linux.
 
-    https://bootstrap.pypa.io/get-pip.py
+Per farlo basta copiare l'indirizzo fornito al lancio di 
 
-Se si apre come pagina, si può scaricare direttamente.
-
-2.2) Scaricare l'eseguibile di anaconda da:
-
-    https://www.anaconda.com/products/individual#windows
-
-e lanciarlo
-
-    
-## 3) Installazione git
-
-Si scarica e esegue da qui:
-
-    https://git-scm.com/download/win
-
-## 4) installazione jupyter
-
-Due opzioni: da prompt dei comandi o da anaconda
-
-4.1) Aprire prompt di comandi come amministratore, poi
-
-    python3 -m pip install jupyter
-
-si può lanciare con 
-
-    jupyter notebook
-
-Nota: talvolta l'html potrebbe avere alcuni problemi in delle versioni di windows, copiare il secondo intdirizzo indicato (con http://localhost:8888/...)
-
-4.2) Lanciare anaconda navigator, jupyter dovrebbe essere sulla prima pagina.
-
-## 5) Installazione root
-
-Si può installare solo tramite binaries, seguendo le istruzioni qui:
-
-    https://root.cern/install/
-
+    jupyter-notebook
+ 
+nella barra di firefox.
 
 ## 6) Installazione macchina virtuale
 
-Si può scaricare da qui:
+Alternativamente al punto 2) si può installare la macchina virtuale da qui e seguire le istruzioni generali:
 
     https://www.virtualbox.org/wiki/Downloads
 
