@@ -10,3 +10,7 @@ Alcune note:
 
 3) Oltre al software indicato, c'è bisogno di un editor di testo per modificare il codice. 
 La scelta è personale, potete usare quello con cui vi trovate più a vostro agio.
+
+4) L'obiettivo ultimo è avere un notebook jupyter in cui il seguente comando funzioni:
+
+    import ROOT
