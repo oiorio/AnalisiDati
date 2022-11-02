@@ -3,7 +3,7 @@ import numpy as np
 
 
 fileInName="data/exercise_Likelihood_1.txt"
-fileOutName="LLFile1.root"
+fileOutName="LLFile.root"
 
 #Definiamo una funzione per leggere un file di testo
 def txtToRoot(fileInName,fileOutName,hname="hx",nbins=100,fileOutOption="RECREATE",dryrun=False,verbose=False):
