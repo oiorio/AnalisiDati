@@ -44,28 +44,78 @@ print (xbinned_array)
 
 ntotal=len(x_array)
 import math
-lnns=[]
-lnn=0
-lik=1.0
-hlnn=ROOT.TH1F("hlnn","hlnn",ntotal,0,ntotal) 
+nlls=[]
 
+extended_nlls={}
+#extended_nlls[(s,b)]
+extended_nll=0
+
+nll=0
+lik=1.0
+hnll=ROOT.TH1F("hnll","hnll",ntotal,0,ntotal) 
+hext_nll=ROOT.TH2F("hext_nll","hext_nll",int(ntotal/5.),0,ntotal,int(ntotal/5.),0,ntotal) 
+
+pois = ROOT.TF1("pois","TMath::Poisson(x,[0])")
+
+
+pois_nll = 0
+#gaussexpo2 = ROOT.TF1("fge2","[0]*gaus+[1]*expo",0,1000)
+#facciamo ora il caso 1d (non extended). In questo caso scegliamo s vincolato a b:
 for s in range(0,ntotal):
-    lnn=0
+    nll=0
     fge.SetParameter(3,s/ntotal)
     fge.SetParameter(4,(ntotal-s)/ntotal)
     for x in x_array:
         lik=lik*fge.Eval(x)
-        lnn_xi=-2*math.log(fge.Eval(x))
-        lnn=lnn + lnn_xi
-    lnns.append(lnn)
-    hlnn.SetBinContent(s,lnn)
-    smin=np.min(np.array(lnns))
+        nll_xi=-2*math.log(fge.Eval(x))
+        nll=nll + nll_xi
+    nlls.append(nll)
+    hnll.SetBinContent(s,nll)
+    smin=np.min(np.array(nlls))
 
+def logpois(n,ni):
+    #dobbiamo fare log(e^-ni ni^n/n!)
+    #-ni + n*log(ni) -(nlog(n)-n)
+    return (-ni+n*math.log(ni)-math.log(math.factorial(n)))#n*math.log(n)+n)
 
-hlnn.Draw()
+    
+#facciamo ora il caso 2d: non vincoliamo s a b e
+#consideriamo la somma fluttuare poissonianamente
+for s in range(0,ntotal,5):
+    for b in range (1,ntotal,5):
+        nll=0
+        pois_nll=0
+
+        #if(abs(s+b-ntotal)>30 ):continue
+        fge.SetParameter(3,s/(s+b))
+        fge.SetParameter(4,b/(s+b))
+        pois.SetParameter(0,s+b)
+        
+        nllpois_stir=logpois(ntotal,s+b)
+        print("poisson parameter",s+b," value ",pois.Eval(ntotal), " log pois stirling ",nllpois_stir )
+        #nllpois = -2*math.log(pois.Eval(ntotal))
+        
+        for x in x_array:
+            lik=lik*fge.Eval(x)
+            nll_xi=-2*math.log(fge.Eval(x))
+            nll=nll + nll_xi
+        
+        nll=nll-2*nllpois_stir
+        extended_nlls[(s,b)]=nll
+        hext_nll.SetBinContent(int(s/5),int(b/5),nll)
+        
+        
+hnll.Draw()
 c1.Draw()
-c1.SaveAs("lnn_shape.png")
+c1.SaveAs("nll_shape.png")
 
 fout=ROOT.TFile("zoomfile.root","RECREATE")
-hlnn.Write()
+hnll.Write()
+hext_nll.Write()
 fout.Close()
+
+hext_nll.Draw("Colz")
+c1.Draw()
+c1.SaveAs("nll_2d_shape.png")
+                              
+                              
