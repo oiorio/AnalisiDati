@@ -1,10 +1,12 @@
 import ROOT
 import numpy as np
 
-def getModel(fileName="models/model_1.txt",modelName='',fRange=(0,1000)):
+def getModel(fileName="models/model_1.txt",modelName='',fRange=(0,2000)):
     gauss="1/([1]*sqrt(2*TMath::Pi()))*exp( ( (x-[0] )*(x-[0]) )/(2*[1]*[1] ) )"
     expo="1/[0]*exp(-x/[0])"
     gaussexpo="[4]/[2]*exp(-x/[2]) + [3]/([1]*sqrt(2*TMath::Pi()))*exp( -( (x-[0] )*(x-[0]) )/(2*[1]*[1] ) )"
+    gaussexpofrac="([4]/([3]+[4])/[2]*exp(-x/[2]) + [3]/([3]+[4])/([1]*sqrt(2*TMath::Pi()))*exp( -( (x-[0] )*(x-[0]) )/(2*[1]*[1] ) ) )"
+    gaussexpofrac="TMath::Power(TMath::Poisson([5],[4]+[3]),1/[5] )*([4]/([3]+[4])/[2]*exp(-x/[2]) + [3]/([3]+[4])/([1]*sqrt(2*TMath::Pi()))*exp( -( (x-[0] )*(x-[0]) )/(2*[1]*[1] ) ) )"
 
     mass=0
     sigma=0
@@ -47,7 +49,15 @@ def getModel(fileName="models/model_1.txt",modelName='',fRange=(0,1000)):
     fgaussexpo.SetParameter(3,100)
     fgaussexpo.SetParameter(4,100)
 
-    return fgauss,fexpo,fgaussexpo
+    fgaussexpofrac= ROOT.TF1(modelName+"gef",gaussexpofrac,fRange[0],fRange[1])
+    fgaussexpofrac.SetParameter(0,mass)
+    fgaussexpofrac.SetParameter(1,sigma)
+    fgaussexpofrac.SetParameter(2,lam)
+    fgaussexpofrac.SetParameter(3,100)
+    fgaussexpofrac.SetParameter(4,100)
+
+    
+    return fgauss,fexpo,fgaussexpo,fgaussexpofrac
 
 
 def txtToArray(fileInName,verbose=False):
