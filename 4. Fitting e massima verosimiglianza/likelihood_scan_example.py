@@ -7,7 +7,7 @@ print(sys.path)
 
 #Parte 1: costruiamo il modello dal file di configurazione
 from utilities import getModel #carichiamo la funzione model che usiamo per prendere i modelli  
-fg,fe,fge=getModel("models/model_3.txt") #vedere getModel: restituisce funzione gaussiana, esponenziale e somma
+fg,fe,fge,fgef=getModel("models/model_3.txt") #vedere getModel: restituisce funzione gaussiana, esponenziale e somma
 
 #Nota: se abbiamo usato una notazione consistente
 #dovremmo poter scegliere l'analisi variando solo il numero "3"
@@ -47,6 +47,7 @@ import math
 nlls=[]
 
 extended_nlls={}
+extended_binned_nlls={}
 #extended_nlls[(s,b)]
 extended_nll=0
 
@@ -54,11 +55,14 @@ nll=0
 lik=1.0
 hnll=ROOT.TH1F("hnll","hnll",ntotal,0,ntotal) 
 hext_nll=ROOT.TH2F("hext_nll","hext_nll",int(ntotal/5.),0,ntotal,int(ntotal/5.),0,ntotal) 
+hext_binned_nll=ROOT.TH2F("hext_binned_nll","hext_binned_nll",int(ntotal/5.),0,ntotal,int(ntotal/5.),0,ntotal) 
 
 pois = ROOT.TF1("pois","TMath::Poisson(x,[0])")
+pois_bin = ROOT.TF1("pois_bin","TMath::Poisson(x,[0])")
 
 
 pois_nll = 0
+binned_nll = 0 
 #gaussexpo2 = ROOT.TF1("fge2","[0]*gaus+[1]*expo",0,1000)
 #facciamo ora il caso 1d (non extended). In questo caso scegliamo s vincolato a b:
 for s in range(0,ntotal):
@@ -85,6 +89,7 @@ for s in range(0,ntotal,5):
     for b in range (1,ntotal,5):
         nll=0
         pois_nll=0
+        binned_nll=0
 
         #if(abs(s+b-ntotal)>30 ):continue
         fge.SetParameter(3,s/(s+b))
@@ -92,9 +97,8 @@ for s in range(0,ntotal,5):
         pois.SetParameter(0,s+b)
         
         nllpois_stir=logpois(ntotal,s+b)
-        print("poisson parameter",s+b," value ",pois.Eval(ntotal), " log pois stirling ",nllpois_stir )
-        #nllpois = -2*math.log(pois.Eval(ntotal))
-        
+        #print("poisson parameter",s+b," value ",pois.Eval(ntotal), " log pois stirling ",nllpois_stir )
+                
         for x in x_array:
             lik=lik*fge.Eval(x)
             nll_xi=-2*math.log(fge.Eval(x))
@@ -103,8 +107,23 @@ for s in range(0,ntotal,5):
         nll=nll-2*nllpois_stir
         extended_nlls[(s,b)]=nll
         hext_nll.SetBinContent(int(s/5),int(b/5),nll)
-        
-        
+
+        for i_bin in range(len(xbinned_array)):
+            fge.SetParameter(3,s/(s+b))
+            fge.SetParameter(4,b/(s+b))
+            
+            x3data=h3.GetBinContent(i_bin+1)#il conteggio dei bin nei TH1 va da 1 a nbins+1
+            x3prediction=(s+b)*fge.Integral(h3.GetBinLowEdge(i_bin+1),h3.GetBinLowEdge(i_bin+2))#così prendiamo gli estremi di integrazione
+            #print("bin # ", i_bin+1, " data ",x3data, " prediction ", x3prediction)
+            pois_bin.SetParameter(0,x3prediction)
+            nll_xi=-2*math.log(pois_bin.Eval(x3data))
+            nll_xi=-2*logpois(x3data,x3prediction)
+            binned_nll=binned_nll+nll_xi
+            #print("s,b ",s,b, "nll_xi ", nll_xi," binned nll ",binned_nll)
+        print("s,b ",s,b, " binned nll ",binned_nll)
+        extended_binned_nlls[(s,b)]=binned_nll
+        hext_binned_nll.SetBinContent(int(s/5),int(b/5),binned_nll)
+            
 hnll.Draw()
 c1.Draw()
 c1.SaveAs("nll_shape.png")
@@ -112,10 +131,15 @@ c1.SaveAs("nll_shape.png")
 fout=ROOT.TFile("zoomfile.root","RECREATE")
 hnll.Write()
 hext_nll.Write()
+hext_binned_nll.Write()
 fout.Close()
 
 hext_nll.Draw("Colz")
 c1.Draw()
 c1.SaveAs("nll_2d_shape.png")
-                              
+
+hext_binned_nll.Draw("Colz")
+c1.Draw()
+c1.SaveAs("binned_nll_2d_shape.png")
+
                               
