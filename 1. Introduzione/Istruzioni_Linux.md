@@ -113,7 +113,7 @@ Una volta lanciato l'icona di jupyter dovrebbe apparire sulla front page potete 
 
 ## 6) root
 
-6.1) **CONSIGLIATO** Se c'è conda installato  seguire la procedura qui :
+6.1) **CONSIGLIATO PER JUPYTER** Se c'è conda installato  seguire la procedura qui :
     
     https://root.cern/install/#conda
    
