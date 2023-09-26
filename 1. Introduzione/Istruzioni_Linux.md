@@ -21,7 +21,7 @@ Per installarlo ci sono due modi:
 Istruzioni:
 
     Scaricare la iso dal sito su una penna. 
-    Ubuntu 20.04 può essere pesante, ordine 3 GB, quindi occhio alla connessione.
+    Ubuntu può essere pesante, ordine 3 GB, quindi occhio alla connessione.
 
     Riavviare il computer, e, nel bios settare il boot di modo che dia priorità alla penna. 
     Il modo di aprire il bios varia da macchina a macchina, tipicamente consiste nel premere 
