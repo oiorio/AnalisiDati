@@ -8,6 +8,7 @@ Powershell dovrebbe essere già presente nella barra dei comandi, bisogna solo f
 
 ## 2) Lanciare l'emulatore nativo di linux da windows
 
+Queste istruzioni sonoo state testate su ubuntu, quindi si consiglia di fare seguito allo stesso modo.
 
 2.1) In molte installazioni windows c'è già ubuntu installato. Basta digitare da power shell
     
@@ -19,9 +20,15 @@ oppure
     
 Per controllare si può iniziare a digitare la parola e premere "tab", che effettuerà completamento automatico.
 
-2.2) Per installare una versione specifica si può usare Windows Subsystem for Linux (wsl). 
+2.2) In caso non sia installato o per installare una versione specifica si può usare Windows Subsystem for Linux (wsl). 
 
-Da PowerShell eseguire:
+Potete seguire i passi indicati qui:
+
+    https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview
+
+Ovvero scaricare ubuntu dalla pagina di windows, [qui l'ultima versione](https://apps.microsoft.com/store/detail/ubuntu/9PDXGNCFSCZV?hl=en-us&gl=us&rtc=1&activetab=pivot%3Aoverviewtab)
+
+E poi da PowerShell eseguire:
 
     wsl --install
     wsl --set-default-version 2
