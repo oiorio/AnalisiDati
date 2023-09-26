@@ -6,15 +6,13 @@
 
 Le istruzioni saranno per ubuntu.
 
-## 1) Installazione sistema operativo - esempio con Ubuntu 20.04 LTS
+## 1) Installazione sistema operativo - esempio con Ubuntu
 
 Si parte dall'istallazione di un file immagine (*iso*) qui:
 
     https://www.ubuntu-it.org/download
 
 Il suggerimento è di scegliere una distribuzione Long Term Support (LTS) piuttosto che una di sviluppo (senza LTS nel nome).
-
-Di seguito assumeremo la 20.04.3
 
 Per installarlo ci sono due modi:
 
@@ -52,9 +50,23 @@ Suggerimenti:
     - Una volta installata la macchina virtuale, lo schermo potrebbe essere fissato a 480x360:
     assicuratevi di cambiarla in modo da poterla usare al meglio.
 
+1.3) Installarlo tramite ambiente di Linux per Windows (Windows Subsystem for Linux) WSL:
+
+Scaricare  ubuntu dalla app windows: [qui l'ultima versione](https://apps.microsoft.com/store/detail/ubuntu/9PDXGNCFSCZV?hl=en-us&gl=us&rtc=1&activetab=pivot%3Aoverviewtab)
+
+E poi da PowerShell eseguire:
+
+    wsl --install
+    wsl --set-default-version 2
+    wsl --install -d ubuntu
+
+Chiederà di scegliere nome utente e password
+
+Lanciarlo da poi tramite programma wsl
+
 ## 2) Python3
 
-Con la versione di linux 20.04 python3 è automaticamente installato
+Con la versione di linux Ubuntu 20.04 e superiori, python3 è automaticamente installato
 
 ## 3) pip/conda
 
@@ -80,47 +92,28 @@ Assumendo che anaconda sia installato in /home/myusername/anaconda3
 
     PATH=$PATH:~/anaconda3/bin
 
-
-
 ## 4) git
 
     sudo apt-get install git
     
 ## 5) jupyter
 
-Potete lanciare Anaconda navigator da linea di comando:
+Per lanciarlo, da terminale (consigliato) fate:
+    
+    jupyter-notebook
+    
+Dovrebbe partire nel browser di base, altrimenti copiate il link al server locale che genera notebook su un browser di vostra scelta.
+
+Potete anche lanciare Anaconda navigator da linea di comando:
 
     anaconda-navigator
 
 Una volta lanciato l'icona di jupyter dovrebbe apparire sulla front page potete cliccare sull'icona e installarlo o updatarlo.
 
-Per lanciarlo, da terminale fate:
-    
-    jupyter-notebook
-    
-Dovrebbe partire nel browser di base.
 
 ## 6) root
 
-Seguire le istruzioni trovate qui:
-
-    https://root.cern/install
-
-6.1) installare via binaries:
-    
-Scaricare i binaries qui:
-    
-    https://root.cern/install/#download-a-pre-compiled-binary-distribution
-
-Eseguire:
-
-    wget https://root.cern/download/root_v6.24.02.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
-    tar -xzvf root_v6.24.02.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
-    source root/bin/thisroot.sh # also available: thisroot.{csh,fish,bat}
-
-6.2) Se c'è conda installato
-
-Seguire la procedura qui :
+6.1) **CONSIGLIATO** Se c'è conda installato  seguire la procedura qui :
     
     https://root.cern/install/#conda
    
@@ -134,3 +127,20 @@ Nota bene: conda qui creerà un ambiente nuovo in cui root funziona, questa è l
 Se volete far funzionare ROOT dovrete fare sempre
     
     conda activate rootenv
+
+Seguire le istruzioni trovate qui:
+
+    https://root.cern/install
+
+6.2) installare via binaries:
+    
+Scaricare i binaries qui:
+    
+    https://root.cern/install/#download-a-pre-compiled-binary-distribution
+
+Eseguire:
+
+    wget https://root.cern/download/root_v6.24.02.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
+    tar -xzvf root_v6.24.02.Linux-ubuntu20-x86_64-gcc9.3.tar.gz
+    source root/bin/thisroot.sh # also available: thisroot.{csh,fish,bat}
+
