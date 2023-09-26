@@ -2,6 +2,8 @@ In generale, Windows non è consigliato per lo sviluppo in HEP, per via in primi
 
 Per far funzionare simultaneamente ROOT, python, jupyter la maniera migliore è usare l'emulatore nativo di Windows 10 via PowerShell, seguono degli step utili.
 
+**CONSIGLIATO** il consiglio è usare la versione con l'emulatore nativo di linux da windows seguendo gli steps 1-5 e poi le  [istruzioni da linux, passi 3-6](https://github.com/oiorio/AnalisiDati/blob/main/1.%20Introduzione/Istruzioni_Linux.md)
+
 ## 1) Lanciare la powershell
 
 Powershell dovrebbe essere già presente nella barra dei comandi, bisogna solo fare attenzione a lanciare il comando con privilegi di amministratore per permettere l'installazione di ulteriori componenti / alcune interazioni.
