@@ -24,7 +24,7 @@ Per controllare si può iniziare a digitare la parola e premere "tab", che effet
 
 Potete seguire i passi indicati qui:
 
-    [https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview)
+[https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview)
 
 Ovvero scaricare ubuntu dalla pagina di windows, [qui l'ultima versione](https://apps.microsoft.com/store/detail/ubuntu/9PDXGNCFSCZV?hl=en-us&gl=us&rtc=1&activetab=pivot%3Aoverviewtab)
 
