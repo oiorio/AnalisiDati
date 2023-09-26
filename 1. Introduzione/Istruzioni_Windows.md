@@ -54,7 +54,7 @@ Per farlo basta copiare l'indirizzo fornito al lancio di
  
 nella barra di firefox.
 
-## 6) Installazione macchina virtuale
+## 5) Alternativa: installazione macchina virtuale
 
 Alternativamente al punto 2) si può installare la macchina virtuale da qui e seguire le istruzioni generali:
 
