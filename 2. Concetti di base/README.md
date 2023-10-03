@@ -22,6 +22,8 @@ Si compone di due parti:
 
 2.2) python : descrizione generale
 
-2.3) scrittura di un eseguibile: confronto C++ e python
+2.3) scrittura di un eseguibile in python
 
-2.4) il PATH di C++ e python
+2.4) scrittura di una classe in python
+
+2.5) scrittura di una classe derivata in python
