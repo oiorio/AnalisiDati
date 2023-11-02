@@ -49,7 +49,7 @@ plt.savefig("exponentials.png")
 import numpy as np
 muon_prob = poisson(muon_rate)
 
-ndatasets=10000
+ndatasets=100
 
 #x= np.arange(muon_prob.ppf(0.01),muon_prob.ppf(0.99))
 x= np.arange(muon_prob.ppf(1.0/ndatasets),muon_prob.ppf(1-1.0/ndatasets))#come estremi della PDF metto 1/(la dimensione del dataset):
@@ -150,29 +150,83 @@ plt.savefig("muon_pz_distribution.png")
 #Es. 2.2 se i muoni hanno una distribuzione angolare come cos2 (theta) cosa cambierà?
 #Come posso considerare tale distribuzione?
 
-#Dobbiamo trovare l'integrale, calcolare la cumulativa, invertirla etc.
+#Dobbiamo trovare l'integrale, calcolare la cumulativa, invertirla etc
+
 #Possiamo farlo "numericamente"?
 #A. Root ce lo fa! --> vedere slides e poi facciamo
 import ROOT
-
+import math
+import numpy as np
 
 xMin=-0.5*math.pi
 xMax=0.5*math.pi
 
-print(math.pi)
-cos2 = ROOT.TF1("cos2theta","[0]*cos(x)*cos(x)",xMin,xMax)
+#print(math.pi)
+cos2 = ROOT.TF1("cos2theta","[0]*cos(x)*cos(x)+[1]+[2]*x",xMin,xMax)
 cos2.SetParameter(0,1)
+cos2.SetParameter(1,0)
+cos2.SetParameter(2,0)
+#cos2.SetParameters(1,0,0)#equivalente alle tre righe sopra
 normalization=cos2.Integral(xMin,xMax)
+print("l'integrale della funzione è: ",normalization)
 cos2.SetParameter(0,1./normalization)
+print("dopo aver normalizzato trovo: ",cos2.Integral(xMin,xMax))
+
 cFunc= ROOT.TCanvas()
 cFunc.Draw()
 cos2.Draw()
 cFunc.SaveAs("Cos2.png")
 
-nevents=1000000
+nevents=100000
 histocos2 = ROOT.TH1F("histocos2","Histogram Sampled from cos2 distribution",100,xMin,xMax)
 histocos2.FillRandom("cos2theta",nevents)
 histocos2.Scale(1./nevents)#normalization to 1 term
 histocos2.Scale(1./histocos2.GetBinWidth(1))#term for scaling the bin widht
-histocos2.Draw("same")
+histocos2.Draw("")
 cFunc.SaveAs("Cos2_withhisto.png")
+
+phif=ROOT.TF1("phi","[0]",0,2*math.pi)
+phif.SetParameter(0,1/(2*math.pi))
+
+px_3=[]
+py_3=[]
+pz_3=[]
+e_3=[]
+
+for energy in espectrum: 
+    #px,py,pz,e
+    theta = cos2.GetRandom()
+    phi = phif.GetRandom()
+    ptot=math.sqrt(energy*energy-m_muon*m_muon)
+    st=math.sin(theta)
+    ct=math.cos(theta)
+    sp=math.sin(phi)
+    cp=math.cos(phi)
+
+    px=ptot*st*cp
+    py=ptot*st*sp
+    pz=ptot*ct
+    muon_e_with_mass=particle(px=px,py=py,pz=pz,e=energy,charge=-1)
+    if(verbose):print(energy,pz)
+    
+    px_3.append(px)
+    py_3.append(py)
+    pz_3.append(pz)
+
+count,bins=np.histogram(px_3)
+print(bins)
+ax.clear()
+ax.hist(px_3, bins=bins, density=False, histtype='stepfilled', alpha=0.2)
+plt.savefig("muon_px_full.png")             
+
+ax.clear()
+ax.hist(py_3, bins=bins, density=False, histtype='stepfilled', alpha=0.2)
+plt.savefig("muon_py_full.png")             
+
+count,bins=np.histogram(pz_3)
+ax.clear()
+ax.hist(pz_3, bins=bins, density=False, histtype='stepfilled', alpha=0.2)
+plt.savefig("muon_pz_full.png")             
+
+
+#E se la mia energia venisse misurata con una risoluzione gaussiana dell'ordine di 10 GeV? Cosa succederebbe?
