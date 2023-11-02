@@ -49,7 +49,7 @@ plt.savefig("exponentials.png")
 import numpy as np
 muon_prob = poisson(muon_rate)
 
-ndatasets=100
+ndatasets=10000
 
 #x= np.arange(muon_prob.ppf(0.01),muon_prob.ppf(0.99))
 x= np.arange(muon_prob.ppf(1.0/ndatasets),muon_prob.ppf(1-1.0/ndatasets))#come estremi della PDF metto 1/(la dimensione del dataset):
@@ -182,7 +182,7 @@ histocos2 = ROOT.TH1F("histocos2","Histogram Sampled from cos2 distribution",100
 histocos2.FillRandom("cos2theta",nevents)
 histocos2.Scale(1./nevents)#normalization to 1 term
 histocos2.Scale(1./histocos2.GetBinWidth(1))#term for scaling the bin widht
-histocos2.Draw("")
+histocos2.Draw("esame")
 cFunc.SaveAs("Cos2_withhisto.png")
 
 phif=ROOT.TF1("phi","[0]",0,2*math.pi)
