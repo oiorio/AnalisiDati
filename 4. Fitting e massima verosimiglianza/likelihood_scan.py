@@ -17,9 +17,9 @@ fg,fe,fge,fgefrac=getModel("models/model_3.txt") #vedere getModel: restituisce f
 print(fge)
 fileHistos=ROOT.TFile("LLFile.root")#prendiamo il file creato prima
 h3=fileHistos.Get("data_exercise_Likelihood_3_txt")
-fge.SetParameters(780,50,200,780,70,850)
+fge.SetParameters(780,50,200,70,800,850)
 fge.FixParameter(5,850)
-h3.Fit(fge.GetName(),"EMS")
+h3.Fit(fge.GetName(),"LEMS")
 h3min=h3.GetBinLowEdge(1)
 h3max=h3.GetBinLowEdge(1000)
 
@@ -196,9 +196,14 @@ if do_simple_scan:
 
 do_profile=True
 if do_profile:
+
+        nllratio_values_profile = ROOT.TH1F("nllratio_values_profile","nllratio_values_profile",n_eventi,0,n_eventi)
+        #in primis ho bisogno del valore massimo della verosimiglianza su tutti i parametri.
+        #come faccio?
+
         #calcoliamo qui la likelihood "complessiva , su tutti i parametri"
         #componente di poisson
-        pois=ROOT.TF1("Nevents","TMath::Poisson(x,[0])",0,n_eventi)
+        pois=ROOT.TF1("Nevents","TMath::Poisson(x,[0])",0,3*n_eventi)
         
         mean_v= fge.GetParameter(0) #valore centrale gaussiana dal fit "totale"
         sigma_v= fge.GetParameter(1) #valore sigma gaussiana dal fit "totale"
@@ -215,24 +220,114 @@ if do_profile:
         nll = 0
         likelihood_value=1
         #print (" signal hypothesis is s = " +str(s))
-        for xi in x_array:
-	        value_xi = fgefrac.Eval(xi)
-	        likelihood_value= likelihood_value*value_xi
-	        nll = nll -2 * math.log(value_xi)
-                
-        print(" max likelihood value is: ", nll+nll_pois_max," ; poisson part is ", nll_pois_max, " ; p.d.f. part is: ", nll)
-        
-        for s in range(0,n_eventi):
-                ""
-        
-        #per ognuno di questi valori del parametro cosa devo fare?
-        #in primis ho bisogno del valore massimo della verosimiglianza su tutti i parametri.
-        #come faccio?
-        
-        #poi dobbiamo prendere il valore della massima verosimiglianza facendo il fit fissato s
-        
 
-    
+        for xi in x_array:
+                value_xi = fgefrac.Eval(xi)
+                likelihood_value= likelihood_value*value_xi
+                nll = nll -2 * math.log(value_xi)
+                #print("xi is ", xi, " pdf is ", value_xi," nll ", nll)
+                
+        print(" max likelihood value is: ", nll+nll_pois_max," ; poisson part is ", nll_pois_max, " ; p.d.f. part i-s: ", nll)
+        max_nll=nll+nll_pois_max
+
+        for s in range(0,n_eventi):
+                #if(s!=30):continue
+                fge.SetParameters(780,50,200,70,870,850)
+                fge.FixParameter(5,850)
+                fge.FixParameter(3,s)
+                h3.Fit(fge.GetName(),"LEMSQ")
+                
+                mean_v= fge.GetParameter(0) #valore centrale gaussiana dal fit "totale"
+                sigma_v= fge.GetParameter(1) #valore sigma gaussiana dal fit "totale"
+                lambda_v= fge.GetParameter(2) #valore lambda esponenziale dal fit "totale"
+                s_v =fge.GetParameter(3) #valore segnale dal fit "totale"
+                b_v =fge.GetParameter(4) #valore fondo dal fit "totale"
+
+                
+                pois.SetParameter(0,s_v+b_v)
+                lik_pois_max = pois.Eval(n_eventi)
+                doSkip=False
+                if(lik_pois_max>=0):
+                        nll_pois_s = -2 * math.log(lik_pois_max) 
+                else:
+                        doSkip=True
+                fgefrac.SetParameters(mean_v,sigma_v,lambda_v,s_v,b_v)#componente "continua"
+                
+                nll = 0
+                likelihood_value=1
+                #print (" signal hypothesis is s = " +str(s))
+                
+                for xi in x_array:
+                        value_xi = fgefrac.Eval(xi)
+                        if(value_xi<=0):doSkip=True
+                        if(doSkip):continue
+                        likelihood_value= likelihood_value*value_xi
+                        nll = nll -2 * math.log(value_xi)
+                        #print("xi is ", xi, " pdf is ", value_xi," nll ", nll )
+
+                if doSkip:
+                        continue
+                print("s is ",s," max likelihood value is: ", nll+nll_pois_s," ; poisson part is ", nll_pois_s, " ; p.d.f. part is: ", nll)              
+                nllratio_values_profile.SetBinContent(s,nll+nll_pois_s - max_nll)
+                #per ognuno di questi valori del parametro cosa devo fare?
+        
+                #dobbiamo prendere il valore della massima verosimiglianza facendo il fit fissato s
+
+        nllratio_values_profile.Draw()
+        c1.SaveAs("nllratio_values_profile.png")
+        nllratio_values_profile.Write("nllratio_values_profile_signal")
+        nllratio_values_profile.Reset("ICES")
+        
+        for mass in range(0,1000):
+                #if(s!=30):continue
+                fge.SetParameters(780,50,200,70,870,850)
+                fge.FixParameter(5,850)
+                fge.FixParameter(0,mass)
+                h3.Fit(fge.GetName(),"LEMSQ")
+                
+                mean_v= fge.GetParameter(0) #valore centrale gaussiana dal fit "totale"
+                sigma_v= fge.GetParameter(1) #valore sigma gaussiana dal fit "totale"
+                lambda_v= fge.GetParameter(2) #valore lambda esponenziale dal fit "totale"
+                s_v =fge.GetParameter(3) #valore segnale dal fit "totale"
+                b_v =fge.GetParameter(4) #valore fondo dal fit "totale"
+
+                print()
+                
+                pois.SetParameter(0,s_v+b_v)
+                lik_pois_max = pois.Eval(n_eventi)
+                doSkip=False
+                if(lik_pois_max>=0):
+                        nll_pois_s = -2 * math.log(lik_pois_max) 
+                else:
+                        doSkip=True
+                fgefrac.SetParameters(mean_v,sigma_v,lambda_v,s_v,b_v)#componente "continua"
+                
+                nll = 0
+                likelihood_value=1
+                #print (" signal hypothesis is s = " +str(s))
+                
+                for xi in x_array:
+                        value_xi = fgefrac.Eval(xi)
+                        if(value_xi<=0):doSkip=True
+                        if(doSkip):continue
+                        likelihood_value= likelihood_value*value_xi
+                        nll = nll -2 * math.log(value_xi)
+                        #print("xi is ", xi, " pdf is ", value_xi," nll ", nll )
+
+                if doSkip:
+                        continue
+                print("s is ",s," max likelihood value is: ", nll+nll_pois_s," ; poisson part is ", nll_pois_s, " ; p.d.f. part is: ", nll)              
+                nllratio_values_profile.SetBinContent(mass,nll+nll_pois_s - max_nll)
+                #per ognuno di questi valori del parametro cosa devo fare?
+        
+                #dobbiamo prendere il valore della massima verosimiglianza facendo il fit fissato s
+
+
+
+        nllratio_values_profile.Draw()
+        c1.SaveAs("nllratio_values_profile_mass.png")
+        nllratio_values_profile.Write("nllratio_profile_values_mass")
+        
 out_content.Close()
 #break
 
