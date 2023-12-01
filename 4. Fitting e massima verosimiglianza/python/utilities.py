@@ -6,7 +6,8 @@ def getModel(fileName="models/model_1.txt",modelName='',fRange=(0,2000)):
     expo="1/[0]*exp(-x/[0])"
     gaussexpo="[4]/[2]*exp(-x/[2]) + [3]/([1]*sqrt(2*TMath::Pi()))*exp( -( (x-[0] )*(x-[0]) )/(2*[1]*[1] ) )"
     gaussexpofrac="([4]/([3]+[4])/[2]*exp(-x/[2]) + [3]/([3]+[4])/([1]*sqrt(2*TMath::Pi()))*exp( -( (x-[0] )*(x-[0]) )/(2*[1]*[1] ) ) )"
-    gaussexpofrac="TMath::Power(TMath::Poisson([5],[4]+[3]),1/[5] )*([4]/([3]+[4])/[2]*exp(-x/[2]) + [3]/([3]+[4])/([1]*sqrt(2*TMath::Pi()))*exp( -( (x-[0] )*(x-[0]) )/(2*[1]*[1] ) ) )"
+    gaussexpo="TMath::Power(TMath::Poisson([5],[4]+[3]),1/[5] )*([4]/([3]+[4])/[2]*exp(-x/[2]) + [3]/([3]+[4])/([1]*sqrt(2*TMath::Pi()))*exp( -( (x-[0] )*(x-[0]) )/(2*[1]*[1] ) ) )"
+    #gaussexpo="TMath::Power(TMath::Poisson([5],[4]+[3]),1/[5] )*([4]/[2]*exp(-x/[2]) + [3]/([1]*sqrt(2*TMath::Pi()))*exp( -( (x-[0] )*(x-[0]) )/(2*[1]*[1] ) ) )"
 
     mass=0
     sigma=0
